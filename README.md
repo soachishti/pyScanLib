@@ -48,7 +48,7 @@ Example:
         
 Detail Example:
 ------------
-Check [exampleUsage.py](blob/master/exampleUsage.py) in repo
+Check [exampleUsage.py](exampleUsage.py) in repo
 
 Notice:
 ------------
