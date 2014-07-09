@@ -1,6 +1,6 @@
-from pyScanLib import scanLib
+from pyScanLib import pyScanLib
 
-pyScanLib = scanLib()
+pyScanLib = pyScanLib()
 
 scanners = pyScanLib.getScanners()
 print scanners
@@ -21,7 +21,6 @@ pyScanLib.setScanArea(width=width,height=height) #(left,top,width,height)
 
 #A4 Example
 #pyScanLib.setScanArea(width=8.26,height=11.693) #(left,top,width,height) in Inches
-
 
 pyScanLib.setPixelType("color") #bw/gray/color
 

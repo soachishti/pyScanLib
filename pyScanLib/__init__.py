@@ -7,13 +7,13 @@ platform = sys.platform
 if platform == "win32":
     import twainLib
 
-    class scanLib(twainLib.twainLib, unitConverter.unitConverter):
+    class pyScanLib(twainLib.twainLib, unitConverter.unitConverter):
         pass
 
 elif platform == "linux":
     import saneLib
 
-    class scanLib(saneLib.saneLib, unitConverter.unitConverter):
+    class pyScanLib(saneLib.saneLib, unitConverter.unitConverter):
         pass
 
 else:
