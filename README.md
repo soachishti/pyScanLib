@@ -48,4 +48,4 @@ Example:
         
 Detail Example:
 ------------
-Check exampleUsage.py in repo
+Check [exampleUsage.py](blob/master/exampleUsage.py) in repo
