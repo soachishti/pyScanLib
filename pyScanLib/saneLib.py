@@ -1,5 +1,10 @@
 import sane
 
+#======================================================================
+#	Name:	    saneLib
+#   Location:   https://github.com/soachishti/pyScanLib
+#	License:    BSD 2-Clause License
+#======================================================================
 
 class saneLib(object):
 

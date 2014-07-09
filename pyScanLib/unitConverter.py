@@ -1,3 +1,11 @@
+
+#======================================================================
+#	File Name:	    unitConverter
+#   Location:       https://github.com/soachishti/pyScanLib
+#	License:        BSD 2-Clause License
+#======================================================================
+
+
 class unitConverter(object):
 
     def pixelToInch(self, pixel):

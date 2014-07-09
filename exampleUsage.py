@@ -1,5 +1,11 @@
 from pyScanLib import pyScanLib
 
+#======================================================================
+#	Name:	    saneLib
+#   Location:   https://github.com/soachishti/pyScanLib
+#	License:    BSD 2-Clause License
+#======================================================================
+
 pyScanLib = pyScanLib()
 
 scanners = pyScanLib.getScanners()

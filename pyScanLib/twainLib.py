@@ -2,6 +2,11 @@ import twain
 import Image
 from StringIO import StringIO
 
+#======================================================================
+#	Name:	    twainLib
+#   Location:   https://github.com/soachishti/pyScanLib
+#	License:    BSD 2-Clause License
+#======================================================================
 
 class twainLib(object):
 

@@ -49,3 +49,11 @@ Example:
 Detail Example:
 ------------
 Check [exampleUsage.py](blob/master/exampleUsage.py) in repo
+
+Notice:
+------------
+* Not tested on Linux however work perfect on Windows.
+
+License:
+------------
+pyScanLib uses BSD 2-Clause License.
