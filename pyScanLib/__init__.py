@@ -1,5 +1,5 @@
 import sys
-import unitConverter  # Contains unit converting functions ie millimeter to inch (mmToInch) etc
+from . import unitConverter  # Contains unit converting functions ie millimeter to inch (mmToInch) etc
 
 """
  * pyScanLib
@@ -33,13 +33,13 @@ import unitConverter  # Contains unit converting functions ie millimeter to inch
 platform = sys.platform
 
 if platform == "win32":
-    import twainLib
+    from . import twainLib
 
     class pyScanLib(twainLib.twainLib, unitConverter.unitConverter):
         pass
 
-elif platform == "linux":
-    import saneLib
+elif platform.startswith("linux"):
+    from . import saneLib
 
     class pyScanLib(saneLib.saneLib, unitConverter.unitConverter):
         pass
