@@ -52,7 +52,8 @@ Check [exampleUsage.py](exampleUsage.py) in repo
 
 Notice:
 ------------
-* Not tested on Linux however work perfect on Windows.
+* Known to work on Linux (Python 3.4) [Pull #1](https://github.com/soachishti/pyScanLib/pull/1)
+* Not tested on Linux by author, however work perfect on Windows.
 
 License:
 ------------
