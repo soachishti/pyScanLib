@@ -27,6 +27,13 @@ from . import unitConverter  # Contains unit converting functions ie millimeter 
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+ * Mac OS:
+	brew install sane-backends
+	pip install python-sane
+
+
 """
 
 
@@ -38,7 +45,7 @@ if platform == "win32":
     class pyScanLib(twainLib.twainLib, unitConverter.unitConverter):
         pass
 
-elif platform.startswith("linux"):
+elif platform.startswith("linux") or platform == 'darwin':
     from . import saneLib
 
     class pyScanLib(saneLib.saneLib, unitConverter.unitConverter):
