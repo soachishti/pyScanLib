@@ -34,12 +34,14 @@ class saneLib(object):
         Arguments:
         scannerName -- Name of Scanner return by getScanners()
         """
+        
         self.scanner = sane.open(scannerName)
 
     def setDPI(self, dpi):
         """
         Set DPI to selected scanner and dpi to self.dpi
         """
+
         if self.scanner == None:
             raise ScannerNotSet
 
@@ -57,6 +59,9 @@ class saneLib(object):
         bottom(height) -- Height of scanned Image
         """
 
+        if self.scanner == None:
+            raise ScannerNotSet
+
         # http://www.sane-project.org/html/doc014.html#f5
         # (left, top, right, bottom)
         # top left x axis          left
@@ -72,6 +77,7 @@ class saneLib(object):
         """
         Return Scanner Layout as Tuple (left, top, right, bottom) in Inches      
         """
+
         return (mmToInch(self.scanner.tl_x), mmToInch(self.scanner.tl_y), mmToInch(self.scanner.br_x), mmToInch(self.scanner.br_y))
 
     def setPixelType(self, pixelType):
@@ -81,12 +87,20 @@ class saneLib(object):
         Arguments:
         pixelType -- Pixel type - bw (Black & White), gray (Gray) and color(Colored)
         """
+
+        if self.scanner == None:
+            raise ScannerNotSet
+
         self.scanner.mode = pixelType.lower()
 
     def scan(self):
         """
         Scan and return PIL object if success else return False
         """
+        
+        if self.scanner == None:
+            raise ScannerNotSet
+
         try:
             self.scanner.start()
             image = self.scanner.snap()
@@ -101,6 +115,7 @@ class saneLib(object):
         if self.scanner:
             self.scanner.close()
             del self.scanner
+        self.scanner = None
 
     def scanPreview(self):
         """

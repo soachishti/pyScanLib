@@ -36,12 +36,14 @@ class twainLib(object):
         Arguments:
         scannerName -- Name of Scanner return by getScanners()
         """
+
         self.scanner = self.sourceManager.OpenSource(scannerName)
 
     def setDPI(self, dpi):
         """
         Set DPI to selected scanner and dpi to self.dpi
         """
+    
         if self.scanner == None:
             raise ScannerNotSet
         
@@ -62,6 +64,10 @@ class twainLib(object):
         width(right) -- Width of scanned Image
         bottom(height) -- Height of scanned Image
         """
+
+        if self.scanner == None:
+            raise ScannerNotSet
+
         #((left, top, width, height) document_number, page_number, frame_number)
         width = float(width)
         height = float(height)
@@ -74,6 +80,10 @@ class twainLib(object):
         """
         Return Scanner Layout as Tuple (left, top, right, bottom) in Inches       
         """
+    
+        if self.scanner == None:
+            raise ScannerNotSet
+
         return self.scanner.GetImageLayout()
 
     def setPixelType(self, pixelType):
@@ -83,6 +93,10 @@ class twainLib(object):
         Arguments:
         pixelType -- Pixel type - bw (Black & White), gray (Gray) and color(Colored)
         """
+        
+        if self.scanner == None:
+            raise ScannerNotSet
+
         pixelTypeMap = {'bw': twain.TWPT_BW,
                         'gray': twain.TWPT_GRAY,
                         'color': twain.TWPT_RGB}
@@ -97,6 +111,9 @@ class twainLib(object):
         """
         Scan and return PIL object if success else return False
         """
+        if self.scanner == None:
+            raise ScannerNotSet
+
         self.scanner.RequestAcquire(0, 1)
         info = self.scanner.GetImageInfo()
         try:
