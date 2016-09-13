@@ -10,14 +10,17 @@ from StringIO import StringIO
 
 class twainLib(object):
 
-    """The is main class of Twain API (Win32)
+    """
+    The is main class of Twain API (Win32)
     """
 
     def __init__(self):
+        self.scanner = None
         self.dpi = 200  # Define for use in pixeltoInch function
 
     def getScanners(self):
-        """Get available scanner from twain module
+        """
+        Get available scanner from twain module
         """
         self.sourceManager = twain.SourceManager(0)
         scanners = self.sourceManager.GetSourceList()
@@ -27,7 +30,8 @@ class twainLib(object):
             return None
 
     def setScanner(self, scannerName):
-        """Connected to Scanner using Scanner Name
+        """
+        Connected to Scanner using Scanner Name
 
         Arguments:
         scannerName -- Name of Scanner return by getScanners()
@@ -35,16 +39,22 @@ class twainLib(object):
         self.scanner = self.sourceManager.OpenSource(scannerName)
 
     def setDPI(self, dpi):
-        """Set DPI to selected scanner and dpi to self.dpi
         """
+        Set DPI to selected scanner and dpi to self.dpi
+        """
+        if self.scanner == None:
+            raise ScannerNotSet
+        
         self.dpi = dpi
+
         self.scanner.SetCapability(
             twain.ICAP_XRESOLUTION, twain.TWTY_FIX32, float(self.dpi))
         self.scanner.SetCapability(
             twain.ICAP_YRESOLUTION, twain.TWTY_FIX32, float(self.dpi))
 
     def setScanArea(self, left=0.0, top=0.0, width=8.267, height=11.693):
-        """Set Custom scanner layout to selected scanner in Inches
+        """
+        Set Custom scanner layout to selected scanner in Inches
 
         Arguments:
         left -- Left position of scanned Image in scanner 
@@ -59,18 +69,19 @@ class twainLib(object):
         top = float(top)
         self.scanner.SetImageLayout((left, top, width, height), 1, 1, 1)
 
-    #size in inches
+    # size in inches
     def getScannerSize(self):
-        """Return Scanner Layout as Tuple (left, top, right, bottom) in Inches       
+        """
+        Return Scanner Layout as Tuple (left, top, right, bottom) in Inches       
         """
         return self.scanner.GetImageLayout()
 
     def setPixelType(self, pixelType):
-        """Set pixelType to selected scanner
+        """
+        Set pixelType to selected scanner
 
         Arguments:
         pixelType -- Pixel type - bw (Black & White), gray (Gray) and color(Colored)
-
         """
         pixelTypeMap = {'bw': twain.TWPT_BW,
                         'gray': twain.TWPT_GRAY,
@@ -83,7 +94,8 @@ class twainLib(object):
             twain.ICAP_PIXELTYPE, twain.TWTY_UINT16, pixelType)
 
     def scan(self):
-        """Scan and return PIL object if success else return False
+        """
+        Scan and return PIL object if success else return False
         """
         self.scanner.RequestAcquire(0, 1)
         info = self.scanner.GetImageInfo()
@@ -96,14 +108,16 @@ class twainLib(object):
             return False
 
     def closeScanner(self):
-        """ Destory 'self.scanner' class of twain module generated in setScanner function
+        """
+        Destory 'self.scanner' class of twain module generated in setScanner function
         """
         if self.scanner:
             self.scanner.destroy()
         self.scanner = None
 
     def scanPreview(self):
-        """Pray for this function ;)
+        """
+        Show preview of image while scanning in progress.
         """
         raise NotImplementedError
 

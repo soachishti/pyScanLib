@@ -14,9 +14,11 @@ class saneLib(object):
     def __init__(self):
         self.dpi = 200
         self.layout = False
+        self.scanner = None
 
     def getScanners(self):
-        """Get available scanner from sane module
+        """
+        Get available scanner from sane module
         """
         sane.init()
         devices = sane.get_devices()[0]
@@ -26,7 +28,8 @@ class saneLib(object):
             return None
 
     def setScanner(self, scannerName):
-        """Connected to Scanner using Scanner Name
+        """
+        Connected to Scanner using Scanner Name
 
         Arguments:
         scannerName -- Name of Scanner return by getScanners()
@@ -34,13 +37,18 @@ class saneLib(object):
         self.scanner = sane.open(scannerName)
 
     def setDPI(self, dpi):
-        """Set DPI to selected scanner and dpi to self.dpi
         """
+        Set DPI to selected scanner and dpi to self.dpi
+        """
+        if self.scanner == None:
+            raise ScannerNotSet
+
         self.dpi = dpi
         self.scanner.resolution = self.dpi
 
     def setScanArea(self, left=0.0, top=0.0, width=8.267, height=11.693):
-        """Set Custom scanner layout to selected scanner in Inches
+        """
+        Set Custom scanner layout to selected scanner in Inches
 
         Arguments:
         left -- Left position of scanned Image in scanner 
@@ -61,21 +69,23 @@ class saneLib(object):
         self.scanner.br_y = float(inchTomm(height))
 
     def getScannerSize(self):
-        """Return Scanner Layout as Tuple (left, top, right, bottom) in Inches      
+        """
+        Return Scanner Layout as Tuple (left, top, right, bottom) in Inches      
         """
         return (mmToInch(self.scanner.tl_x), mmToInch(self.scanner.tl_y), mmToInch(self.scanner.br_x), mmToInch(self.scanner.br_y))
 
     def setPixelType(self, pixelType):
-        """Set pixelType to selected scanner
+        """
+        Set pixelType to selected scanner
 
         Arguments:
         pixelType -- Pixel type - bw (Black & White), gray (Gray) and color(Colored)
-
         """
         self.scanner.mode = pixelType.lower()
 
     def scan(self):
-        """Scan and return PIL object if success else return False
+        """
+        Scan and return PIL object if success else return False
         """
         try:
             self.scanner.start()
@@ -85,14 +95,16 @@ class saneLib(object):
             return False
 
     def closeScanner(self):
-        """ Destory 'self.scanner' class of sane module generated in setScanner function
+        """
+        Destory 'self.scanner' class of sane module generated in setScanner function
         """
         if self.scanner:
             self.scanner.close()
             del self.scanner
 
     def scanPreview(self):
-        """Pray for this function ;)
+        """
+        Show preview of image while scanning in progress.
         """
         raise NotImplementedError
 

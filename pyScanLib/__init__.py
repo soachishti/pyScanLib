@@ -29,11 +29,9 @@ from . import unitConverter  # Contains unit converting functions ie millimeter 
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
- * Mac OS:
+ * Mac OS Installation:
 	brew install sane-backends
 	pip install python-sane
-
-
 """
 
 
