@@ -5,8 +5,8 @@ An combination of Twain and SANE API
 
 Requirements:
 ------------
-* Python 2.* (Windows) 
-* Python 2-3.4 (Linux)
+* Python 2.6/2.7 (Windows) 
+* Python 2.6-3.4 (Linux)
 * SANE API for Linux, Mac OS
 * TWAIN API for Win32
 
@@ -52,7 +52,7 @@ Example:
         # A4 Example
         ls.setScanArea(width=8.26,height=11.693) # (left,top,width,height) in inches
 
-        ls.setPixelType("color") #bw/gray/color
+        ls.setPixelType("color") # bw/gray/color
 
         pil = ls.scan()
         pil.save("scannedImage.jpg")
