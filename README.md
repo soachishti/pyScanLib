@@ -55,7 +55,9 @@ Example:
         ls.setPixelType("color") # bw/gray/color
 
         pil = ls.scan()
+        pil.show()
         pil.save("scannedImage.jpg")
+        
         ls.closeScanner() # unselect selected scanner, set in setScanners()
         ls.close() # Destory whole class
         
