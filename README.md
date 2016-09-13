@@ -41,9 +41,9 @@ Library Installation:
 Example:
 ------------
         
-        from includes.scannerLib import scanLib
+        from pyScanLib import pyScanLib
 
-        ls = scanLib() # load scanner library
+        ls = pyScanLib() # load scanner library
         devices = ls.getScanners()
         ls.setScanner(devices[0])
 
