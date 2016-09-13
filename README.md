@@ -5,9 +5,10 @@ An combination of Twain and SANE API
 
 Requirements:
 ------------
-* Python 2.*
-* SANE API for Linux
-* Twain Lib for Win32
+* Python 2.* (Windows) 
+* Python 2-3.4 (Linux)
+* SANE API for Linux, Mac OS
+* TWAIN API for Win32
 
 Functions:
 ------------
@@ -16,6 +17,7 @@ Functions:
 * setScanners(scannerName)
 * setDPI(dpi)
 * setScanArea(left,top,width,height) - For scanning selected Area size in Inches
+* getScannerSize() - Return scanner size eg. (left, top, right, bottom)
 * setPixelType("color") - bw (Black & White), gray and color
 * scan() - Start Scanning
 * closeScanner() - Unselect selected scanner
@@ -23,28 +25,36 @@ Functions:
 
 Special Function:
 ----------------
-* pixelToInch(pixel) - Convert Pixel(s) to Inch(es) using DPI from setDPI() or default 200
+* pixelToInch(pixel) - Convert Pixel(s) to Inch(es)
 * cmToInch(cm) - Convert Centimeter(s) to Inch(es)
 * inchTomm(inch) - Convert Inch(es) to Millimeter(s)
 * mmToInch(mm) - Convert Millimeter(s) to Inch(es)
+
+Library Installation:
+------------------
+- Linux or Mac OS
+ * brew install sane-backends
+ * pip install python-sane
+- Windows
+ * Download and install twain from [TWAIN PyPI](https://pypi.python.org/pypi/twain)
 
 Example:
 ------------
         
         from includes.scannerLib import scanLib
 
-        loadScanner = scanLib()
-        scanners = loadScanner.getScanners()
-        loadScanner.setScanner(scanners[0])
+        ls = scanLib() # load scanner library
+        devices = ls.getScanners()
+        ls.setScanner(devices[0])
 
-        loadScanner.setDPI(300)
-        loadScanner.setScanArea(width=512,height=512) #(left,top,width,height)
-        loadScanner.setPixelType("color") #bw/gray/color
+        ls.setDPI(300)
+        ls.setScanArea(width=512,height=512) #(left,top,width,height)
+        ls.setPixelType("color") #bw/gray/color
 
-        PIL = loadScanner.scan()
-        PIL.save("scanImage.jpg")
-        loadScanner.closeScanner() # unselect selected scanner in setScanners()
-        loadScanner.close() # Destory whole class
+        pil = ls.scan()
+        pil.save("scannedImage.jpg")
+        ls.closeScanner() # unselect selected scanner, set in setScanners()
+        ls.close() # Destory whole class
         
 Detail Example:
 ------------
@@ -53,7 +63,12 @@ Check [exampleUsage.py](exampleUsage.py) in repo
 Notice:
 ------------
 * Known to work on Linux (Python 3.4) [Pull #1](https://github.com/soachishti/pyScanLib/pull/1)
+* Known to work on Mac OS [Pull #2](https://github.com/soachishti/pyScanLib/pull/2)
 * Not tested on Linux by author, however work perfect on Windows.
+
+TODO:
+-------
+* Implement scanPreview()
 
 License:
 ------------
